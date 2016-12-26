@@ -1,4 +1,4 @@
-NAME = engine.a
+NAME = libengine.a
 
 FLG = -Wall -Wextra -Werror
 
