@@ -12,15 +12,14 @@ OBJ = $(SRC:srcs/%.c=%.o)
 INC = -I./includes \
 	  -I./libft/includes \
 	  -I/usr/include \
-	  -I/usr/include/SDL2
-
-LIB = -L./libft
+	  -I/usr/include/SDL2 \
+	  -I/Library/Frameworks/SDL2.framework/Headers
 
 all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc $(FLG) -c $(SRC) $(INC) $(LIB) -lm -lft -lSDL2 -O3
+	gcc $(FLG) -c $(SRC) $(INC) -O3
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
