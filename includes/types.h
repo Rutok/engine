@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/25 09:07:03 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/10 12:10:06 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_event
 	t_bool		key_f2;
 	t_bool		key_f3;
 	t_bool		draw;
+	t_bool		in_use;
 }				t_event;
 
 typedef struct s_env t_env;

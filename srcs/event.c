@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/25 09:15:04 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/10 12:20:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	event_process(t_event *event)
 	SDL_Event	ev;
 
 	//	event_reset(event);
+	while (event->in_use) { SDL_Delay(2);}
+	event->in_use = 1;
 	while (SDL_PollEvent(&ev))
 	{
 		if (event->focus)
@@ -33,6 +35,7 @@ void	event_process(t_event *event)
 		else if (ev.type == SDL_WINDOWEVENT && ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 			event->focus = 0;
 	}
+	event->in_use = 0;
 }
 
 void	event_reset(t_event *event)

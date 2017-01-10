@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/25 09:13:18 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/10 12:10:45 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		engine_run(t_env *env)
 	int	etime;
 
 	event_reset(&env->event);
+	env->event.in_use = 0;
 	etime = 0;
 	time = SDL_GetTicks();
 	env->thread = SDL_CreateThread(env->app.process, "Child", env);
