@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/10 12:10:06 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 02:26:42 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <SDL2/SDL.h>
 # include "libft.h"
+# include "event.h"
+
+typedef struct	s_env t_env;
 
 typedef struct	s_win
 {
@@ -35,32 +38,10 @@ typedef struct	s_renderer
 	t_bool			draw;
 }				t_renderer;
 
-typedef struct	s_event
-{
-	t_bool		exit;
-	t_bool		focus;
-	t_bool		move_left;
-	t_bool		move_right;
-	t_bool		move_up;
-	t_bool		move_down;
-	t_bool		plus;
-	t_bool		minus;
-	t_bool		mouse_move;
-	t_bool		mouse_click;
-	t_2ipair	mouse_pos;
-	t_bool		key_f1;
-	t_bool		key_f2;
-	t_bool		key_f3;
-	t_bool		draw;
-	t_bool		in_use;
-}				t_event;
-
-typedef struct s_env t_env;
-
 typedef struct	s_app
 {
 	void	(*init)(t_env *);
-	int	(*process)(void *);
+	int		(*process)(void *);
 	void	(*destroy)(t_env *);
 	void	*d;
 	int		argc;
@@ -69,8 +50,8 @@ typedef struct	s_app
 
 typedef struct s_env
 {
-	t_win	win;
-	t_event	event;
+	t_win		win;
+	t_event		event;
 	t_renderer	rend;
 	t_app		app;
 	SDL_Thread	*thread;

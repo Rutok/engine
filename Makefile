@@ -6,6 +6,7 @@ SRC = srcs/engine.c \
 	  srcs/drawer.c \
 	  srcs/event.c \
 	  srcs/error.c \
+	  srcs/keyboard_event.c \
 
 OBJ = $(SRC:srcs/%.c=%.o)
 
