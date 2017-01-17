@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 02:34:06 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 02:50:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	event_reset(t_event *event)
 	int		i;
 
 	event->exit = 0;
-	event->focus = 0;
+	event->focus = 1;
 	event->draw = 0;
 	i = 0;
 	while (i < 26)
