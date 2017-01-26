@@ -7,6 +7,12 @@ SRC = srcs/engine.c \
 	  srcs/event.c \
 	  srcs/error.c \
 	  srcs/keyboard_event.c \
+	  srcs/camera.c \
+	  srcs/matrix.c \
+	  srcs/matrix_utility.c \
+	  srcs/object.c \
+	  srcs/scene.c \
+	  srcs/triangle.c \
 
 OBJ = $(SRC:srcs/%.c=%.o)
 

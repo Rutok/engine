@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 02:26:42 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/26 04:00:49 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <SDL2/SDL.h>
 # include "libft.h"
 # include "event.h"
+
+/* ENGINE BASE */
 
 typedef struct	s_env t_env;
 
@@ -56,5 +58,51 @@ typedef struct s_env
 	t_app		app;
 	SDL_Thread	*thread;
 }				t_env;
+
+/* 3D RENDERING */
+
+typedef struct	s_scene t_scene;
+
+typedef struct	s_pixel
+{
+	t_2ipair	pos;
+	double		z_buffer;
+}				t_pixel;
+
+typedef enum	e_projection_type
+{
+	parallel,
+	perspective
+}				t_projection_type;
+
+typedef struct	s_camera
+{
+	t_3dvertex			pos;
+	t_3dvertex			dir;
+	t_2dpair			fov;
+	t_pixel				**pixels;
+	t_projection_type	projection;
+}				t_camera;
+
+typedef struct	s_object
+{
+	t_3dvertex	pos;
+	t_3dvertex	dir;
+	void		(*draw_obj)(t_scene *, struct s_object *);
+	t_list		*triangles;
+}				t_object;
+
+typedef struct	s_scene
+{
+	t_camera	camera;
+	t_list		*objects;
+}				t_scene;
+
+typedef struct	s_triangle
+{
+	t_3dvertex	a;
+	t_3dvertex	b;
+	t_3dvertex	c;
+}				t_triangle;
 
 #endif
