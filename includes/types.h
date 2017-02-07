@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/03 03:00:07 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/07 01:15:47 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct	s_scene t_scene;
 
 typedef struct	s_color
 {
-	t_uchar		red;
-	t_uchar		green;
-	t_uchar		blue;
-	t_uchar		alpha;
+	t_uchar		r;
+	t_uchar		g;
+	t_uchar		b;
+	t_uchar		a;
 }				t_color;
 
 typedef struct	s_pixel
