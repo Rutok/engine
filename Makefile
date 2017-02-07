@@ -13,6 +13,7 @@ SRC = srcs/engine.c \
 	  srcs/object.c \
 	  srcs/scene.c \
 	  srcs/triangle.c \
+	  srcs/color.c \
 
 OBJ = $(SRC:srcs/%.c=%.o)
 
