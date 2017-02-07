@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/03 03:00:07 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/08 00:36:50 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,12 @@ typedef enum	e_projection_type
 typedef struct	s_camera
 {
 	t_3dvertex			pos;
-	t_3dvertex			dir;
+	t_3dvertex			u;
+	t_3dvertex			v;
+	t_3dvertex			n;
 	t_2dpair			fov;
+	double				ratio;
+	double				d;
 	t_pixel				**pixels;
 	t_projection_type	projection;
 }				t_camera;
