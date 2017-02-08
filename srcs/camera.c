@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 00:39:33 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/08 01:18:57 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
 	return (n);
 }
 
-t_3dvertex	to_camera_space(t_3dvertex *v, t_camera *camera)
+t_3dvertex	to_camera_space(t_3dvertex v, t_camera *camera)
 {
 	t_3dvertex	n;
 
-	n.x = v->x * camera->u.x + v->y * camera->u.y + v->z * camera->u.z;
-	n.y = v->x * camera->v.x + v->y * camera->v.y + v->z * camera->u.z;
-	n.z = v->x * camera->n.x + v->y * camera->n.y + v->z * camera->u.z;
+	v.x -= camera->pos.x;
+	v.y -= camera->pos.y;
+	v.z -= camera->pos.z;
+	n.x = v.x * camera->u.x + v.y * camera->u.y + v.z * camera->u.z;
+	n.y = v.x * camera->v.x + v.y * camera->v.y + v.z * camera->u.z;
+	n.z = v.x * camera->n.x + v.y * camera->n.y + v.z * camera->u.z;
 	return (n);
 }
