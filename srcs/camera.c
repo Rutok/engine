@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 01:18:57 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/08 04:00:52 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,25 @@
 
 void		init_camera(t_env *env, double rad_v_field, t_camera *camera)
 {
+	int		i;
+	int		j;
+
 	camera->ratio = env->win.size.x / env->win.size.y;
 	camera->fov.y = rad_v_field;
 	camera->d = 1.0 / tan(rad_v_field / 2);
+	camera->size = env->win.size;
+	camera->pixels = malloc(sizeof(t_pixel *) * camera->size.y);
+	i = 0;
+	while (i < camera->size.y)
+	{
+		camera->pixels[i] = malloc(sizeof(t_pixel) * camera->size.x);
+		j = 0;
+		while (j < camera.size.x)
+		{
+			camera->pixels[i][j].z_buffer = 999999999999;
+		}
+		i++;
+	}
 }
 
 t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
@@ -31,21 +47,20 @@ t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
 	}
 	else
 	{
-		n.x = 0;
-		n.y = 0;
+		n.x = -2;
+		n.y = -2;
 	}
 	return (n);
 }
 
-t_3dvertex	to_camera_space(t_3dvertex v, t_camera *camera)
+void		to_camera_space(t_3dvertex* v, t_camera *camera)
 {
-	t_3dvertex	n;
+	t_3dvertex	p;
 
-	v.x -= camera->pos.x;
-	v.y -= camera->pos.y;
-	v.z -= camera->pos.z;
-	n.x = v.x * camera->u.x + v.y * camera->u.y + v.z * camera->u.z;
-	n.y = v.x * camera->v.x + v.y * camera->v.y + v.z * camera->u.z;
-	n.z = v.x * camera->n.x + v.y * camera->n.y + v.z * camera->u.z;
-	return (n);
+	p.x = v->x - camera->pos.x;
+	p.y = v->y - camera->pos.y;
+	p.z = v->z - camera->pos.z;
+	v->x = p.x * camera->u.x + p.y * camera->u.y + p.z * camera->u.z;
+	v->y = p.x * camera->v.x + p.y * camera->v.y + p.z * camera->v.z;
+	v->z = p.x * camera->n.x + p.y * camera->n.y + p.z * camera->n.z;
 }

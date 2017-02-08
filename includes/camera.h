@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 02:10:29 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 01:31:06 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/08 02:33:01 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void		init_camera(t_env *env, double v_field, t_camera *camera);
 
 t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera);
 
-t_3dvertex	to_camera_space(t_3dvertex v, t_camera *camera);
+void		to_camera_space(t_3dvertex* v, t_camera *camera);
 
 #endif
