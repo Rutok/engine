@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 04:00:52 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/08 23:37:11 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void		init_camera(t_env *env, double rad_v_field, t_camera *camera)
 	{
 		camera->pixels[i] = malloc(sizeof(t_pixel) * camera->size.x);
 		j = 0;
-		while (j < camera.size.x)
+		while (j < camera->size.x)
 		{
-			camera->pixels[i][j].z_buffer = 999999999999;
+			camera->pixels[i][j].z_buffer = -1;
+			j++;
 		}
 		i++;
 	}
@@ -63,4 +64,21 @@ void		to_camera_space(t_3dvertex* v, t_camera *camera)
 	v->x = p.x * camera->u.x + p.y * camera->u.y + p.z * camera->u.z;
 	v->y = p.x * camera->v.x + p.y * camera->v.y + p.z * camera->v.z;
 	v->z = p.x * camera->n.x + p.y * camera->n.y + p.z * camera->n.z;
+}
+
+void		reset_camera_pixels(t_camera *camera)
+{
+	t_2ipair	p;
+
+	p.y = 0;
+	while (p.y < camera->size.y)
+	{
+		p.x = 0;
+		while (p.x < camera->size.x)
+		{
+			camera->pixels[p.y][p.x].z_buffer = -1;
+			p.x++;
+		}
+		p.y++;
+	}
 }
