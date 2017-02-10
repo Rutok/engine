@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 23:37:11 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/10 05:53:15 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,36 @@ t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
 {
 	t_2dpair	n;
 
-	if (v->z != 0)
+	if (v->z > 0)
 	{
 		n.x = (v->x * camera->d) / (v->z * camera->ratio);
 		n.y = (v->y * camera->d) / v->z;
 	}
+	else if (v->z < 0)
+	{
+		n.x = -(v->x * camera->d) / (v->z * camera->ratio);
+		n.y = -(v->y * camera->d) / v->z;
+	}
 	else
 	{
-		n.x = -2;
-		n.y = -2;
+		n.x = (v->x * camera->d) / (camera->ratio);
+		n.y = (v->y * camera->d);
 	}
 	return (n);
 }
 
-void		to_camera_space(t_3dvertex* v, t_camera *camera)
+t_3dvertex	to_camera_space(t_3dvertex* v, t_camera *camera)
 {
 	t_3dvertex	p;
+	t_3dvertex	s;
 
 	p.x = v->x - camera->pos.x;
 	p.y = v->y - camera->pos.y;
 	p.z = v->z - camera->pos.z;
-	v->x = p.x * camera->u.x + p.y * camera->u.y + p.z * camera->u.z;
-	v->y = p.x * camera->v.x + p.y * camera->v.y + p.z * camera->v.z;
-	v->z = p.x * camera->n.x + p.y * camera->n.y + p.z * camera->n.z;
+	s.x = p.x * camera->u.x + p.y * camera->u.y + p.z * camera->u.z;
+	s.y = p.x * camera->v.x + p.y * camera->v.y + p.z * camera->v.z;
+	s.z = p.x * camera->n.x + p.y * camera->n.y + p.z * camera->n.z;
+	return (s);
 }
 
 void		reset_camera_pixels(t_camera *camera)
