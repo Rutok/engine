@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/08 01:37:15 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/14 02:46:52 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct	s_camera
 	t_pixel				**pixels;
 	t_2ipair			size;
 	t_projection_type	projection;
+	double				speed;
+	double				sensitivity;
 }				t_camera;
 
 typedef struct	s_object
