@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:39 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 02:34:26 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/15 23:18:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,7 @@ void	event_handle_keyboard_key_function(SDL_Keycode *k, t_event *event);
 void	event_handle_keyboard_key_special(SDL_Keycode *k, t_event *event);
 
 void	event_handle_mouse(SDL_Event *ev, t_event *event);
+
+int		handle_event(t_bool *e);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 02:50:03 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/15 23:19:16 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,14 @@ void	event_handle_mouse(SDL_Event *ev, t_event *event)
 		event->mouse.pos.x = ev->button.x;
 		event->mouse.pos.y = ev->button.y;
 	}
+}
+
+int		handle_event(t_bool *e)
+{
+	if (*e)
+	{
+		*e = 0;
+		return (1);
+	}
+	return (0);
 }
