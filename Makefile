@@ -14,6 +14,7 @@ SRC = srcs/engine.c \
 	  srcs/scene.c \
 	  srcs/triangle.c \
 	  srcs/color.c \
+	  srcs/vertex_utility.c \
 
 OBJ = $(SRC:srcs/%.c=%.o)
 
