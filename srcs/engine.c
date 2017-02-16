@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/03 02:13:48 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/16 04:16:46 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void
 		ft_exit(MSG_SDL_INIT_FAILED);
 	if (!(env->win.win_sdl = SDL_CreateWindow(env->win.name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, env->win.size.x, env->win.size.y, SDL_WINDOW_SHOWN)))
 		ft_exit(MSG_SDL_INIT_FAILED);
+	SDL_SetWindowFullscreen(env->win.win_sdl, SDL_WINDOW_FULLSCREEN);
 	drawer_init(env);
 	env->app.init = init;
 	env->app.process = process;
