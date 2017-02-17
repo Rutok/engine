@@ -6,13 +6,14 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/22 14:15:12 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 02:28:59 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "drawer.h"
 #include "libft.h"
 #include "error.h"
+#include "color.h"
 
 void	drawer_init(t_env *env)
 {
@@ -34,7 +35,7 @@ void	drawer_process(t_renderer *rend)
 {
 	if (rend->draw)
 	{
-		SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels2, rend->size.x * sizeof(uint32));
+		SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels, rend->size.x * sizeof(uint32));
 		rend->draw = 0;
 		SDL_RenderCopy(rend->rend_sdl, rend->texture_sdl, NULL, NULL);
 		SDL_RenderPresent(rend->rend_sdl);
@@ -50,8 +51,7 @@ void	drawer_destroy(t_renderer *rend)
 
 void	drawer_put_pixel(t_2ipair coord, uint32 color, t_renderer *rend)
 {
-	if (coord.x >= 0 && coord.x < rend->size.x && coord.y >= 0 && coord.y < rend->size.y)
-		rend->pixels[coord.x + rend->size.x * coord.y] = color;
+	rend->pixels[coord.x + rend->size.x * coord.y] = color;
 }
 
 void	drawer_clean(t_renderer *rend)
@@ -71,12 +71,26 @@ void	drawer_clean(t_renderer *rend)
 	}
 }
 
-void	drawer_wait_copy(t_env *env)
+void	drawer_wait_copy(t_env *env, t_camera *cam)
 {
+	t_2ipair	c;
+
 	while (env->rend.draw)
+		SDL_Delay(1);
+	c.y = 0;
+	while (c.y < cam->size.y)
 	{
-		SDL_Delay(3);
+		c.x = 0;
+		while (c.x < cam->size.x)
+		{
+			if (cam->pixels[c.y][c.x].z_buffer != -1)
+				drawer_put_pixel(c, t_colortouint32(&cam->pixels[c.y][c.x].color), &env->rend);
+			else
+				drawer_put_pixel(c, 0, &env->rend);
+			cam->pixels[c.y][c.x].z_buffer = -1;
+			c.x++;
+		}
+		c.y++;
 	}
-	memcpy(env->rend.pixels2, env->rend.pixels, sizeof(uint32) * env->win.size.x * env->win.size.y);
 	env->rend.draw = 1;
 }
