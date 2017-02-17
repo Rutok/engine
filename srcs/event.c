@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/15 23:19:16 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 22:09:49 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	event_process(t_event *event)
 {
 	SDL_Event	ev;
 
-	while (event->in_use) { SDL_Delay(2);}
-	event->in_use = 1;
+//	while (event->in_use) { SDL_Delay(2);}
+//	event->in_use = 1;
 	while (SDL_PollEvent(&ev))
 	{
 		if (event->focus)

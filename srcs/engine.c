@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/16 04:16:46 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 22:06:18 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 #include "error.h"
 #include "drawer.h"
 #include "SDL2/SDL_thread.h"
+
+static void	print_fps(void)
+{
+	static int time;
+	static int fps;
+	Uint32			t;
+
+	fps++;
+	if (!time)
+		time = SDL_GetTicks();
+	if ((t = SDL_GetTicks()) >= (Uint32)time + 500)
+	{
+		ft_putstr("FPS : ");
+		ft_putnbr(fps+ fps);
+		ft_putchar('\n');
+		fps = 0;
+		time = t;
+	}
+}
 
 void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void (*destroy)(t_env *))
 {
@@ -32,24 +51,29 @@ void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void
 
 int		engine_run(t_env *env)
 {
-	int	time;
-	int	etime;
+//	int	time;
+//	int	etime;
+//	int	fps;
 
+//	fps = 1000 / FPS;
 	event_reset(&env->event);
 	env->event.in_use = 0;
-	etime = 0;
-	time = SDL_GetTicks();
-	env->thread = SDL_CreateThread(env->app.process, "app_thread", env);
+//	etime = 0;
+//	time = SDL_GetTicks();
+//	env->thread = SDL_CreateThread(env->app.process, "app_thread", env);
+		print_fps();
 	while (!env->event.exit)
 	{
-		etime = SDL_GetTicks() - time;
-		if (etime < 1000 / FPS)
-			SDL_Delay((1000 / FPS) - etime);
-		time = SDL_GetTicks();
+//		etime = SDL_GetTicks() - time;
+//		if (etime < fps)
+//			SDL_Delay(fps - etime);
+//		time += etime;
 		event_process(&env->event);
-		drawer_process(&env->rend);
+		env->app.process(env);
+		if (env->rend.draw)
+			drawer_process(&env->rend);
 	}
-	SDL_WaitThread(env->thread, &time);
+//	SDL_WaitThread(env->thread, &time);
 	engine_destroy(env);
 	return (0);
 }

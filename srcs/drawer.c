@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 02:28:59 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 09:33:36 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,10 @@ void	drawer_init(t_env *env)
 
 void	drawer_process(t_renderer *rend)
 {
-	if (rend->draw)
-	{
-		SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels, rend->size.x * sizeof(uint32));
-		rend->draw = 0;
-		SDL_RenderCopy(rend->rend_sdl, rend->texture_sdl, NULL, NULL);
-		SDL_RenderPresent(rend->rend_sdl);
-	}
+	SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels, rend->size.x * sizeof(uint32));
+	rend->draw = 0;
+	SDL_RenderCopy(rend->rend_sdl, rend->texture_sdl, NULL, NULL);
+	SDL_RenderPresent(rend->rend_sdl);
 }
 
 void	drawer_destroy(t_renderer *rend)
@@ -75,8 +72,8 @@ void	drawer_wait_copy(t_env *env, t_camera *cam)
 {
 	t_2ipair	c;
 
-	while (env->rend.draw)
-		SDL_Delay(1);
+//	while (env->rend.draw)
+//		SDL_Delay(2);
 	c.y = 0;
 	while (c.y < cam->size.y)
 	{

@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/16 03:30:46 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 11:35:59 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
 		n.x = (v->x * camera->d) / (v->z * camera->ratio);
 		n.y = (v->y * camera->d) / v->z;
 	}
-	/*else if (v->z == 9987)
+	else if (v->z < 0)
 	{
-		n.x = -(v->x * camera->d) / (v->z * camera->ratio);
-		n.y = -(v->y * camera->d) / v->z;
-	}*/
+		n.x = (v->x * camera->d) / (-v->z * camera->ratio);
+		n.y = (v->y * camera->d) / -v->z;
+	}
 	else
 	{
-		n.x = (v->x * camera->d) / (camera->ratio);
+		n.x = (v->x * camera->d) /(camera->ratio);
 		n.y = (v->y * camera->d);
 	}
 	return (n);

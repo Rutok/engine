@@ -29,7 +29,7 @@ all: $(NAME)
 $(NAME):
 	make -C libft
 	gcc $(FLG) -c $(SRC) $(INC) -O3
-	ar rc $(NAME) $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 
 clean:

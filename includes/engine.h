@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:13 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/22 12:31:18 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/17 22:01:12 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "types.h"
 # include "event.h"
 
-# define FPS 600
+# define FPS 60
 
 /*
  * Init SDL modules, and create data structures
