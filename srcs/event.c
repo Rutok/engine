@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 22:09:49 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/18 04:42:01 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	event_handle_mouse(SDL_Event *ev, t_event *event)
 	if (ev->type == SDL_MOUSEMOTION)
 	{
 		event->mouse.move = 1;
-		event->mouse.pos.x = ev->motion.x;
-		event->mouse.pos.y = ev->motion.y;
+		event->mouse.pos.x = ev->motion.xrel;
+		event->mouse.pos.y = ev->motion.yrel;
 	}
 	else
 	{

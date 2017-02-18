@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 22:06:18 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/18 05:15:26 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	print_fps(void)
 	fps++;
 	if (!time)
 		time = SDL_GetTicks();
-	if ((t = SDL_GetTicks()) >= (Uint32)time + 500)
+	if ((t = SDL_GetTicks()) >= (Uint32)time + 1000)
 	{
 		ft_putstr("FPS : ");
-		ft_putnbr(fps+ fps);
+		ft_putnbr(fps);
 		ft_putchar('\n');
 		fps = 0;
 		time = t;
@@ -41,37 +41,38 @@ void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void
 		ft_exit(MSG_SDL_INIT_FAILED);
 	if (!(env->win.win_sdl = SDL_CreateWindow(env->win.name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, env->win.size.x, env->win.size.y, SDL_WINDOW_SHOWN)))
 		ft_exit(MSG_SDL_INIT_FAILED);
-	SDL_SetWindowFullscreen(env->win.win_sdl, SDL_WINDOW_FULLSCREEN);
 	drawer_init(env);
 	env->app.init = init;
 	env->app.process = process;
 	env->app.destroy = destroy;
 	env->app.init(env);
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_SetWindowGrab(env->win.win_sdl, SDL_TRUE);
 }
 
 int		engine_run(t_env *env)
 {
-//	int	time;
-//	int	etime;
-//	int	fps;
+	int	time;
+	int	etime;
+	int	fps;
 
-//	fps = 1000 / FPS;
+	fps = 1000 / FPS;
 	event_reset(&env->event);
 	env->event.in_use = 0;
-//	etime = 0;
-//	time = SDL_GetTicks();
-//	env->thread = SDL_CreateThread(env->app.process, "app_thread", env);
-		print_fps();
+	etime = 0;
+	time = SDL_GetTicks();
+	env->thread = SDL_CreateThread(env->app.process, "app_thread", env);
 	while (!env->event.exit)
 	{
-//		etime = SDL_GetTicks() - time;
-//		if (etime < fps)
-//			SDL_Delay(fps - etime);
-//		time += etime;
+		etime = SDL_GetTicks() - time;
+		if (etime < fps)
+			SDL_Delay(fps - etime);
+		time += etime;
 		event_process(&env->event);
 		env->app.process(env);
 		if (env->rend.draw)
 			drawer_process(&env->rend);
+		print_fps();
 	}
 //	SDL_WaitThread(env->thread, &time);
 	engine_destroy(env);

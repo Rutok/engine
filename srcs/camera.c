@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 11:35:59 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/18 05:50:18 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
 	}
 	else if (v->z < 0)
 	{
+	//	n.x = -1;
 		n.x = (v->x * camera->d) / (-v->z * camera->ratio);
-		n.y = (v->y * camera->d) / -v->z;
+		n.y = camera->size.y - 1;
 	}
 	else
 	{
