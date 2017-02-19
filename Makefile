@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	gcc $(FLG) -c $(SRC) $(INC) -O3
+	gcc $(FLG) -c $(SRC) $(INC) -O3 -flto
 	ar rcs $(NAME) $(OBJ)
 	ranlib $(NAME)
 

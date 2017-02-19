@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/18 05:15:26 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/19 08:35:41 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int		engine_run(t_env *env)
 	env->event.in_use = 0;
 	etime = 0;
 	time = SDL_GetTicks();
-	env->thread = SDL_CreateThread(env->app.process, "app_thread", env);
 	while (!env->event.exit)
 	{
 		etime = SDL_GetTicks() - time;
@@ -74,7 +73,6 @@ int		engine_run(t_env *env)
 			drawer_process(&env->rend);
 		print_fps();
 	}
-//	SDL_WaitThread(env->thread, &time);
 	engine_destroy(env);
 	return (0);
 }
