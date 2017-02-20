@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/19 08:35:41 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/20 03:34:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void
 	env->app.init(env);
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetWindowGrab(env->win.win_sdl, SDL_TRUE);
+	SDL_WarpMouseInWindow(NULL, env->win.size.x / 2, env->win.size.y / 2);
 }
 
 int		engine_run(t_env *env)

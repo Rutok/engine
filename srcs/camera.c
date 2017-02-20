@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/19 08:29:22 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/20 02:08:48 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,39 @@ void		init_camera(t_env *env, double rad_v_field, t_camera *camera)
 	}
 }
 
-t_2dpair	camera_project_vertex(t_3dvertex *v, t_camera *camera)
+void		camera_project_vertex(t_3dvertex *v, t_2dpair *c_view, t_camera *camera)
 {
-	t_2dpair	n;
 
 	if (v->z > 0)
 	{
-		n.x = (v->x * camera->d) / (v->z * camera->ratio);
-		n.y = (v->y * camera->d) / v->z;
+		c_view->x = (v->x * camera->d) / (v->z * camera->ratio);
+		c_view->y = (v->y * camera->d) / v->z;
 	}
 	else if (v->z < 0)
 	{
-	//	n.x = -1;
-		n.x = (v->x * camera->d) / (-v->z * camera->ratio);
-		n.y = (v->y * camera->d) / -v->z;
+		c_view->x = (v->x * camera->d) / (-v->z * camera->ratio);
+		c_view->y = (v->y * camera->d) / (-v->z);
 	}
 	else
 	{
-		n.x = (v->x * camera->d) /(camera->ratio);
-		n.y = (v->y * camera->d);
+		c_view->x = (v->x * camera->d) /(camera->ratio);
+		c_view->y = (v->y * camera->d);
 	}
-	return (n);
+	c_view->x = round(((c_view->x + camera->ratio) * camera->size.x)  / (2 * camera->ratio));
+	c_view->y = round(((c_view->y + 1) * camera->size.y)  / (2));
 }
 
-t_3dvertex	to_camera_space(t_3dvertex* v, t_camera *camera)
+void		to_camera_space(t_3dvertex* v, t_3dvertex* c_space, t_camera *camera)
 {
-	t_3dvertex	p;
-	t_3dvertex	s;
-
-	p.x = v->x - camera->pos.x;
-	p.y = v->y - camera->pos.y;
-	p.z = v->z - camera->pos.z;
-	s.x = p.x * camera->u.x + p.y * camera->u.y + p.z * camera->u.z;
-	s.y = p.x * camera->v.x + p.y * camera->v.y + p.z * camera->v.z;
-	s.z = p.x * camera->n.x + p.y * camera->n.y + p.z * camera->n.z;
-	return (s);
+	c_space->x = (v->x - camera->pos.x) * camera->u.x
+				+ (v->y - camera->pos.y) * camera->u.y
+				+ (v->z - camera->pos.z) * camera->u.z;
+	c_space->y = (v->x - camera->pos.x) * camera->v.x
+				+ (v->y - camera->pos.y) * camera->v.y
+				+ (v->z - camera->pos.z) * camera->v.z;
+	c_space->z = (v->x - camera->pos.x) * camera->n.x
+				+ (v->y - camera->pos.y) * camera->n.y
+				+ (v->z - camera->pos.z)* camera->n.z;
 }
 
 void		reset_camera_pixels(t_camera *camera)

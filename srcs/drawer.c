@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 09:33:36 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/19 23:08:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void	drawer_wait_copy(t_env *env, t_camera *cam)
 {
 	t_2ipair	c;
 
-//	while (env->rend.draw)
-//		SDL_Delay(2);
 	c.y = 0;
 	while (c.y < cam->size.y)
 	{
