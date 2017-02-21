@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/19 07:49:16 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/21 02:40:05 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	event_process(t_event *event)
 		{
 			if (ev.type == SDL_QUIT)
 				event->exit = 1;
-			else if (ev.type == SDL_KEYDOWN)
-				event_handle_keyboard(&ev, event);
 			else if (ev.type == SDL_MOUSEMOTION || ev.type == SDL_MOUSEBUTTONUP)
 				event_handle_mouse(&ev, event);
 		}
@@ -32,52 +30,18 @@ void	event_process(t_event *event)
 		else if (ev.type == SDL_WINDOWEVENT && ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 			event->focus = 0;
 	}
+	if (event->focus)
+	{
+		event->keys = SDL_GetKeyboardState(NULL);
+	}
 	event->in_use = 0;
 }
 
 void	event_reset(t_event *event)
 {
-	int		i;
-
 	event->exit = 0;
 	event->focus = 1;
 	event->draw = 0;
-	i = 0;
-	while (i < 26)
-	{
-		event->key_alphan.letters[i] = 0;
-		if (i < 12)
-		{
-			event->key_function.keys[i] = 0;
-			event->key_special.keys[i] = 0;
-		}
-		if (i < 10)
-		{
-			event->key_alphan.numbers[i] = 0;
-			event->key_pad.numbers[i] = 0;
-			event->key_nav.keys[i] = 0;
-			event->key_pad.keys[i] = 0;
-		}
-		i++;
-	}
-}
-
-void	event_handle_keyboard(SDL_Event *ev, t_event *event)
-{
-	SDL_Keycode	k;
-
-	k = ev->key.keysym.sym;
-	if (k >= 'a' && k <= 'z')
-		event->key_alphan.letters[k - 'a'] = 1;
-	else if (k >= '0' && k <= '9')
-		event->key_alphan.numbers[k - '0'] = 1;
-	else
-	{
-		event_handle_keyboard_key_pad(&k, event);
-		event_handle_keyboard_key_nav(&k, event);
-		event_handle_keyboard_key_function(&k, event);
-		event_handle_keyboard_key_special(&k, event);
-	}
 }
 
 void	event_handle_mouse(SDL_Event *ev, t_event *event)

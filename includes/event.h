@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:39 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/15 23:18:03 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/21 02:38:10 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct		s_event
 	t_key_nav		key_nav;
 	t_key_function	key_function;
 	t_key_special	key_special;
+	const Uint8		*keys;
 	t_mouse			mouse;
 	t_bool			focus;
 	t_bool			exit;
@@ -125,16 +126,6 @@ typedef struct		s_event
 void	event_process(t_event *event);
 
 void	event_reset(t_event *event);
-
-void	event_handle_keyboard(SDL_Event *ev, t_event *event);
-
-void	event_handle_keyboard_key_pad(SDL_Keycode *k, t_event *event);
-
-void	event_handle_keyboard_key_nav(SDL_Keycode *k, t_event *event);
-
-void	event_handle_keyboard_key_function(SDL_Keycode *k, t_event *event);
-
-void	event_handle_keyboard_key_special(SDL_Keycode *k, t_event *event);
 
 void	event_handle_mouse(SDL_Event *ev, t_event *event);
 
