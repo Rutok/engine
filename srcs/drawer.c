@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/19 23:08:03 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/22 06:21:55 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	drawer_init(t_env *env)
 {
 	if (!(env->rend.rend_sdl = SDL_CreateRenderer(env->win.win_sdl, -1, SDL_RENDERER_ACCELERATED)))
 		ft_exit(MSG_SDL_INIT_FAILED);
-	if (!(env->rend.texture_sdl = SDL_CreateTexture(env->rend.rend_sdl, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, env->win.size.x, env->win.size.y)))
+	if (!(env->rend.texture_sdl = SDL_CreateTexture(env->rend.rend_sdl, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, env->win.size.x, env->win.size.y)))
 		ft_exit(MSG_SDL_INIT_FAILED);
 	if (!(env->rend.pixels = (uint32 *)malloc(sizeof(uint32) * env->win.size.x * env->win.size.y)))
 		ft_exit(MSG_MALLOC);
@@ -34,9 +34,9 @@ void	drawer_init(t_env *env)
 void	drawer_process(t_renderer *rend)
 {
 	SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels, rend->size.x * sizeof(uint32));
-	rend->draw = 0;
 	SDL_RenderCopy(rend->rend_sdl, rend->texture_sdl, NULL, NULL);
 	SDL_RenderPresent(rend->rend_sdl);
+	rend->draw = 0;
 }
 
 void	drawer_destroy(t_renderer *rend)
@@ -81,7 +81,7 @@ void	drawer_wait_copy(t_env *env, t_camera *cam)
 			if (cam->pixels[c.y][c.x].z_buffer != -1)
 				drawer_put_pixel(c, t_colortouint32(&cam->pixels[c.y][c.x].color), &env->rend);
 			else
-				drawer_put_pixel(c, 0, &env->rend);
+				drawer_put_pixel(c, 0x16000000, &env->rend);
 			cam->pixels[c.y][c.x].z_buffer = -1;
 			c.x++;
 		}

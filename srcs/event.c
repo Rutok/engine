@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/21 02:40:05 by nboste           ###   ########.fr       */
+/*   Updated: 2017/02/21 23:36:01 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	event_process(t_event *event)
 			event->focus = 0;
 	}
 	if (event->focus)
-	{
 		event->keys = SDL_GetKeyboardState(NULL);
-	}
-	event->in_use = 0;
 }
 
 void	event_reset(t_event *event)
