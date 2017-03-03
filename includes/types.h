@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/14 02:46:52 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/03 23:19:11 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,12 @@ typedef struct	s_triangle
 	t_3dvertex	c;
 	t_3dvertex	n;
 }				t_triangle;
+
+typedef struct	s_point
+{
+	t_2ipair	pos;
+	double		z;
+	t_color		c;
+}				t_point;
 
 #endif

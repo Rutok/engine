@@ -7,6 +7,7 @@ SRC = srcs/engine.c \
 	  srcs/event.c \
 	  srcs/error.c \
 	  srcs/camera.c \
+	  srcs/camera_drawer.c \
 	  srcs/matrix.c \
 	  srcs/matrix_utility.c \
 	  srcs/object.c \
