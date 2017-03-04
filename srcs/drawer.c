@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/22 06:21:55 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/04 02:36:05 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	drawer_process(t_renderer *rend)
 	SDL_UpdateTexture(rend->texture_sdl, NULL, rend->pixels, rend->size.x * sizeof(uint32));
 	SDL_RenderCopy(rend->rend_sdl, rend->texture_sdl, NULL, NULL);
 	SDL_RenderPresent(rend->rend_sdl);
+	drawer_clean(rend);
 	rend->draw = 0;
 }
 
@@ -53,39 +54,11 @@ void	drawer_put_pixel(t_2ipair coord, uint32 color, t_renderer *rend)
 
 void	drawer_clean(t_renderer *rend)
 {
-	t_2ipair c;
-
-	c.y = 0;
-	while (c.y < rend->size.y)
-	{
-		c.x = 0;
-		while (c.x < rend->size.x)
-		{
-			drawer_put_pixel(c, 0, rend);
-			c.x++;
-		}
-		c.y++;
-	}
+	ft_memset(rend->pixels, 0, sizeof(int) * rend->size.x * rend->size.y);
 }
 
 void	drawer_wait_copy(t_env *env, t_camera *cam)
 {
-	t_2ipair	c;
-
-	c.y = 0;
-	while (c.y < cam->size.y)
-	{
-		c.x = 0;
-		while (c.x < cam->size.x)
-		{
-			if (cam->pixels[c.y][c.x].z_buffer != -1)
-				drawer_put_pixel(c, t_colortouint32(&cam->pixels[c.y][c.x].color), &env->rend);
-			else
-				drawer_put_pixel(c, 0x16000000, &env->rend);
-			cam->pixels[c.y][c.x].z_buffer = -1;
-			c.x++;
-		}
-		c.y++;
-	}
+	ft_memset(cam->z_buffer, 0, sizeof(uint32) * cam->size.x * cam->size.y);
 	env->rend.draw = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 00:47:55 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/07 00:52:19 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/04 02:00:40 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "types.h"
 
-uint32	t_colortouint32(t_color* c);
+uint32	t_colortouint32(t_color c);
 
 #endif

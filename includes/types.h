@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/03 23:19:11 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/04 02:18:57 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_color
 
 typedef struct	s_pixel
 {
-	double		z_buffer;
+	int			z_buffer;
 	t_color		color;
 }				t_pixel;
 
@@ -94,7 +94,7 @@ typedef struct	s_camera
 	t_2dpair			fov;
 	double				ratio;
 	double				d;
-	t_pixel				**pixels;
+	uint32				*z_buffer;
 	t_2ipair			size;
 	t_projection_type	projection;
 	double				speed;

@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 21:59:03 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/03 23:55:22 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/04 02:23:39 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct	s_line_param
 	t_3itriplet	color_incr;
 }				t_line_param;
 
-int		camera_draw_point(t_point* p, t_camera *cam);
+int		camera_draw_point(t_point* p, t_camera *cam, t_env *env);
 
-void	camera_draw_line(t_point* p1, t_point* p2, t_camera *cam);
+void	camera_draw_line(t_point* p1, t_point* p2, t_camera *cam, t_env *env);
 
 t_bool	is_in_camview(t_2ipair pos, t_camera *cam);
 

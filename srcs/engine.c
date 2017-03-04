@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/21 23:35:32 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/04 02:53:48 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		engine_run(t_env *env)
 		etime = SDL_GetTicks() - time;
 		if (etime < fps)
 			SDL_Delay(fps - etime);
-		time += etime;
+		time += fps;
 		event_process(&env->event);
 		env->app.process(env);
 		if (env->rend.draw)
