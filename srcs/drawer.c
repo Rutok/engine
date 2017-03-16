@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:31 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/04 02:36:05 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/15 17:03:06 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	drawer_init(t_env *env)
 		ft_exit(MSG_SDL_INIT_FAILED);
 	if (!(env->rend.pixels = (uint32 *)malloc(sizeof(uint32) * env->win.size.x * env->win.size.y)))
 		ft_exit(MSG_MALLOC);
-	if (!(env->rend.pixels2 = (uint32 *)malloc(sizeof(uint32) * env->win.size.x * env->win.size.y)))
-		ft_exit(MSG_MALLOC);
-
 	env->rend.size.x = env->win.size.x;
 	env->rend.size.y= env->win.size.y;
 	env->rend.ready = 1;
@@ -43,7 +40,6 @@ void	drawer_process(t_renderer *rend)
 void	drawer_destroy(t_renderer *rend)
 {
 	free(rend->pixels);
-	free(rend->pixels2);
 	SDL_DestroyRenderer(rend->rend_sdl);
 }
 

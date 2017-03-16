@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/04 02:18:57 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/15 17:02:27 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct	s_renderer
 	SDL_Renderer	*rend_sdl;
 	SDL_Texture		*texture_sdl;
 	uint32			*pixels;
-	uint32			*pixels2;
 	t_2ipair		size;
 	t_bool			ready;
 	t_bool			draw;
@@ -58,7 +57,6 @@ typedef struct s_env
 	t_event		event;
 	t_renderer	rend;
 	t_app		app;
-	SDL_Thread	*thread;
 }				t_env;
 
 /* 3D RENDERING */
@@ -72,12 +70,6 @@ typedef struct	s_color
 	t_uchar		b;
 	t_uchar		a;
 }				t_color;
-
-typedef struct	s_pixel
-{
-	int			z_buffer;
-	t_color		color;
-}				t_pixel;
 
 typedef enum	e_projection_type
 {

@@ -18,7 +18,7 @@ int			camera_draw_point(t_point* p, t_camera *cam, t_env *env)
 			|| p->pos.y < 0 || p->pos.y >= cam->size.y)
 		return (0);
 	if (cam->z_buffer[p->pos.y * cam->size.x + p->pos.x] && p->z > cam->z_buffer[p->pos.y * cam->size.x + p->pos.x])
-				return (-1);
+		return (-1);
 	env->rend.pixels[p->pos.x + cam->size.x * p->pos.y] = t_colortouint32(p->c);
 	cam->z_buffer[p->pos.y * cam->size.x + p->pos.x] = p->z;
 	return (1);
@@ -55,8 +55,9 @@ void		camera_draw_line(t_point* p1, t_point* p2, t_camera *cam, t_env *env)
 
 static void	draw_line_X(t_point p, t_line_param *l, t_camera *cam, t_env *env)
 {
-	double	cumul;
-	int		i;
+	double		cumul;
+	int			i;
+	t_3dtriplet	c;
 
 	l->z = l->z / l->d.x;
 	cumul = l->d.x / 2.0;
@@ -64,13 +65,19 @@ static void	draw_line_X(t_point p, t_line_param *l, t_camera *cam, t_env *env)
 	l->color_incr.a /= l->d.x;
 	l->color_incr.b /= l->d.x;
 	l->color_incr.c /= l->d.x;
+	c.a = p.c.r;
+	c.b = p.c.g;
+	c.c = p.c.b;
 	while (++i <= l->d.x)
 	{
 		p.pos.x += l->incr.x;
 		p.z += l->z;
-		p.c.r += l->color_incr.a;
-		p.c.g += l->color_incr.b;
-		p.c.b += l->color_incr.c;
+		c.a += l->color_incr.a;
+		c.b += l->color_incr.b;
+		c.c += l->color_incr.c;
+		p.c.r = round(c.a);
+		p.c.g = round(c.b);
+		p.c.b = round(c.c);
 		cumul += l->d.y;
 		if (cumul >= l->d.x)
 		{
@@ -84,8 +91,9 @@ static void	draw_line_X(t_point p, t_line_param *l, t_camera *cam, t_env *env)
 
 static void	draw_line_Y(t_point p, t_line_param *l, t_camera *cam, t_env *env)
 {
-	double	cumul;
-	int		i;
+	double		cumul;
+	int			i;
+	t_3dtriplet	c;
 
 	l->z = l->z / l->d.y;
 	cumul = l->d.y / 2.0;
@@ -93,13 +101,19 @@ static void	draw_line_Y(t_point p, t_line_param *l, t_camera *cam, t_env *env)
 	l->color_incr.a /= l->d.y;
 	l->color_incr.b /= l->d.y;
 	l->color_incr.c /= l->d.y;
+	c.a = p.c.r;
+	c.b = p.c.g;
+	c.c = p.c.b;
 	while (++i <= l->d.y)
 	{
 		p.pos.y += l->incr.y;
 		p.z += l->z;
-		p.c.r += l->color_incr.a;
-		p.c.g += l->color_incr.b;
-		p.c.b += l->color_incr.c;
+		c.a += l->color_incr.a;
+		c.b += l->color_incr.b;
+		c.c += l->color_incr.c;
+		p.c.r = round(c.a);
+		p.c.g = round(c.b);
+		p.c.b = round(c.c);
 		cumul += l->d.x;
 		if (cumul >= l->d.y)
 		{

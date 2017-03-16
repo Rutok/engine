@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 21:59:03 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/04 02:23:39 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/15 15:13:33 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_line_param
 	t_2ipair	d;
 	t_2ipair	incr;
 	double		z;
-	t_3itriplet	color_incr;
+	t_3dtriplet	color_incr;
 }				t_line_param;
 
 int		camera_draw_point(t_point* p, t_camera *cam, t_env *env);
