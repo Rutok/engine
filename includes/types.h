@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/15 17:02:27 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/16 18:44:19 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct	s_renderer
 	SDL_Texture		*texture_sdl;
 	uint32			*pixels;
 	t_2ipair		size;
-	t_bool			ready;
 	t_bool			draw;
 }				t_renderer;
 

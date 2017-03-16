@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/04 02:53:48 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/16 18:30:26 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "error.h"
 #include "drawer.h"
-#include "SDL2/SDL_thread.h"
 
 static void	print_fps(void)
 {
