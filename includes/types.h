@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/19 15:52:51 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/20 18:13:30 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,14 @@ typedef struct	s_camera
 	t_projection_type	projection;
 	double				speed;
 	double				sensitivity;
+	int					range;
 }				t_camera;
 
 typedef struct	s_3dobject
 {
 	t_3dvertex	pos;
 	t_uvn		uvn;
+	double		scale;
 	t_list		*faces;
 }				t_3dobject;
 
