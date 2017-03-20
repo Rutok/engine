@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/16 18:44:19 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/19 15:52:51 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ typedef struct	s_color
 	t_uchar		a;
 }				t_color;
 
+typedef struct	s_uvn
+{
+	t_3dvertex			u;
+	t_3dvertex			v;
+	t_3dvertex			n;
+}				t_uvn;
+
 typedef enum	e_projection_type
 {
 	parallel,
@@ -92,13 +99,12 @@ typedef struct	s_camera
 	double				sensitivity;
 }				t_camera;
 
-typedef struct	s_object
+typedef struct	s_3dobject
 {
 	t_3dvertex	pos;
-	t_3dvertex	dir;
-	void		(*draw_obj)(t_scene *, struct s_object *);
-	t_list		*triangles;
-}				t_object;
+	t_uvn		uvn;
+	t_list		*faces;
+}				t_3dobject;
 
 typedef struct	s_scene
 {
@@ -106,13 +112,18 @@ typedef struct	s_scene
 	t_list		*objects;
 }				t_scene;
 
-typedef struct	s_triangle
+typedef struct	s_face
 {
-	t_3dvertex	a;
-	t_3dvertex	b;
-	t_3dvertex	c;
-	t_3dvertex	n;
-}				t_triangle;
+	t_3dvertex	v1;
+	t_2dpair	vt1;
+	t_3dvertex	vn1;
+	t_3dvertex	v2;
+	t_2dpair	vt2;
+	t_3dvertex	vn2;
+	t_3dvertex	v3;
+	t_2dpair	vt3;
+	t_3dvertex	vn3;
+}				t_face;
 
 typedef struct	s_point
 {

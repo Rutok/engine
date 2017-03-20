@@ -6,10 +6,10 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 03:53:45 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/26 03:54:29 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/19 16:48:28 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
-void	draw_scene(t_scene *scene);
+void	draw_scene(t_scene *scene, t_env *env);
