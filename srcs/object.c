@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 02:03:37 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/20 18:29:20 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:06:10 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void		to_obj_space(t_3dvertex v, t_3dvertex *o_space, t_3dobject *obj)
 	t_uvn	*d;
 
 	d = &obj->uvn;
-	o_space->x = ((v.x - obj->pos.x) * d->u.x + (v.y - obj->pos.y) * d->u.y + (v.z - obj->pos.z) * d->u.z);
-	o_space->y = ((v.x - obj->pos.x) * d->v.x + (v.y - obj->pos.y) * d->v.y + (v.z - obj->pos.z) * d->v.z);
-	o_space->z = ((v.x - obj->pos.x) * d->n.x + (v.y - obj->pos.y) * d->n.y + (v.z - obj->pos.z) * d->n.z) * obj->scale;
+	o_space->x = ((v.x * d->n.x * obj->scale.x)  + (v.y * d->n.y * obj->scale.y) + (v.z  * d->n.z * obj->scale.z) + obj->pos.x);
+	o_space->y = ((v.x * d->u.x * obj->scale.x)  + (v.y * d->u.y * obj->scale.y)  + (v.z * d->u.z * obj->scale.z) + obj->pos.y);
+	o_space->z = ((v.x * d->v.x * obj->scale.x)  + (v.y  * d->v.y * obj->scale.y) + (v.z * d->v.z * obj->scale.z) + obj->pos.z);
 }
 
 static void		face_to_obj_space(t_face *f, t_3dobject *obj)
@@ -64,7 +64,8 @@ static t_color	fdf_getcolorz(int z)
 int		camera_draw_3dobject(t_3dobject *obj, t_camera *cam, t_env *env)
 {
 	t_list		*l;
-	t_face		f;
+	t_face		*f;
+	t_face		fm;
 	t_3dvertex	c1, c2, c3;
 	t_2dpair	c_view;
 	t_point		p1, p2, p3;
@@ -72,33 +73,35 @@ int		camera_draw_3dobject(t_3dobject *obj, t_camera *cam, t_env *env)
 	l = obj->faces;
 	while (l)
 	{
-		f = *(t_face *)l->content;
-		p1.c = fdf_getcolorz(f.v1.z);
-		p2.c = fdf_getcolorz(f.v2.z);
-		p3.c = fdf_getcolorz(f.v3.z);
-		face_to_obj_space(&f, obj);
-		to_camera_space(&f.v1, &c1, cam);
-		to_camera_space(&f.v2, &c2, cam);
-		to_camera_space(&f.v3, &c3, cam);
-		if (c1.z > 0 || c2.z > 0 || c3.z > 0)
+		f = (t_face *)l->content;
+		fm = *f;
+		f = &fm;
+		face_to_obj_space(f, obj);
+		if (to_camera_space(&f->v1, &c1, cam))
 		{
-			p1.z = (c1.x * c1.x) + (c1.y * c1.y) + (c1.z * c1.z);
-			p2.z = (c2.x * c2.x) + (c2.y * c2.y) + (c2.z * c2.z);
-			p3.z = (c3.x * c3.x) + (c3.y * c3.y) + (c3.z * c3.z);
-			if (p1.z < cam->range && p2.z < cam->range && p3.z < cam->range)
+			if (to_camera_space(&f->v2, &c2, cam))
 			{
-				camera_project_vertex(&c1, &c_view, cam);
-				p1.pos.x = c_view.x;
-				p1.pos.y = c_view.y;
-				camera_project_vertex(&c2, &c_view, cam);
-				p2.pos.x = c_view.x;
-				p2.pos.y = c_view.y;
-				camera_project_vertex(&c3, &c_view, cam);
-				p3.pos.x = c_view.x;
-				p3.pos.y = c_view.y;
-				camera_draw_line(&p1, &p2, cam, env);
-				camera_draw_line(&p1, &p3, cam, env);
-				camera_draw_line(&p2, &p3, cam, env);
+				if (to_camera_space(&f->v3, &c3, cam))
+				{
+					p1.z = (c1.x * c1.x) + (c1.y * c1.y) + (c1.z * c1.z);
+					p2.z = (c2.x * c2.x) + (c2.y * c2.y) + (c2.z * c2.z);
+					p3.z = (c3.x * c3.x) + (c3.y * c3.y) + (c3.z * c3.z);
+					p1.c = fdf_getcolorz(f->v1.z);
+					p2.c = fdf_getcolorz(f->v2.z);
+					p3.c = fdf_getcolorz(f->v3.z);
+					camera_project_vertex(&c1, &c_view, cam);
+					p1.pos.x = c_view.x;
+					p1.pos.y = c_view.y;
+					camera_project_vertex(&c2, &c_view, cam);
+					p2.pos.x = c_view.x;
+					p2.pos.y = c_view.y;
+					camera_project_vertex(&c3, &c_view, cam);
+					p3.pos.x = c_view.x;
+					p3.pos.y = c_view.y;
+					camera_draw_line(&p2, &p3, cam, env);
+					camera_draw_line(&p2, &p1, cam, env);
+					camera_draw_line(&p1, &p3, cam, env);
+				}
 			}
 		}
 		l = l->next;

@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/04 03:00:14 by nboste           ###   ########.fr       */
+/*   Updated: 2017/03/22 15:49:23 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		camera_project_vertex(t_3dvertex *v, t_2dpair *c_view, t_camera *camera)
 		if (v->z > 0)
 		{
 			c_view->x = (v->x * camera->d) / (v->z * camera->ratio);
-			c_view->y = (v->y * camera->d) / v->z;
+			c_view->y = -(v->y * camera->d) / v->z;
 		}
 		else if (v->z < 0)
 		{
@@ -48,11 +48,11 @@ void		camera_project_vertex(t_3dvertex *v, t_2dpair *c_view, t_camera *camera)
 	else
 	{
 		c_view->x = (v->x * camera->ratio) + (camera->size.x / 2);
-		c_view->y = v->y + (camera->size.y / 2);
+		c_view->y = -v->y + (camera->size.y / 2);
 	}
 }
 
-void		to_camera_space(t_3dvertex* v, t_3dvertex* c_space, t_camera *camera)
+t_bool		to_camera_space(t_3dvertex* v, t_3dvertex* c_space, t_camera *camera)
 {
 	c_space->x = (v->x - camera->pos.x) * camera->u.x
 		+ (v->y - camera->pos.y) * camera->u.y
@@ -63,6 +63,9 @@ void		to_camera_space(t_3dvertex* v, t_3dvertex* c_space, t_camera *camera)
 	c_space->z = (v->x - camera->pos.x) * camera->n.x
 		+ (v->y - camera->pos.y) * camera->n.y
 		+ (v->z - camera->pos.z)* camera->n.z;
+	if (c_space->z <= 0)
+		return (0);
+	return (1);
 }
 
 void		reset_camera_pixels(t_camera *camera)
