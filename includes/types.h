@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 04:36:59 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/22 14:25:33 by nboste           ###   ########.fr       */
+/*   Updated: 2017/05/28 12:54:50 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct	s_3dobject
 {
 	t_3dvertex	pos;
 	t_uvn		uvn;
-	//double		scale;
 	t_3dvertex	scale;
 	t_list		*faces;
 }				t_3dobject;
@@ -126,6 +125,9 @@ typedef struct	s_face
 	t_3dvertex	v3;
 	t_2dpair	vt3;
 	t_3dvertex	vn3;
+	t_color		c1;
+	t_color		c2;
+	t_color		c3;
 }				t_face;
 
 typedef struct	s_point

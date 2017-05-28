@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 23:09:07 by nboste            #+#    #+#             */
-/*   Updated: 2017/03/22 15:49:23 by nboste           ###   ########.fr       */
+/*   Updated: 2017/05/28 11:33:50 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_bool		to_camera_space(t_3dvertex* v, t_3dvertex* c_space, t_camera *camera)
 	c_space->z = (v->x - camera->pos.x) * camera->n.x
 		+ (v->y - camera->pos.y) * camera->n.y
 		+ (v->z - camera->pos.z)* camera->n.z;
-	if (c_space->z <= 0)
+	if (c_space->z <= 0 || c_space->z > camera->range)
 		return (0);
 	return (1);
 }
