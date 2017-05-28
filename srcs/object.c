@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 02:03:37 by nboste            #+#    #+#             */
-/*   Updated: 2017/05/28 13:01:56 by nboste           ###   ########.fr       */
+/*   Updated: 2017/05/28 13:55:24 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		camera_draw_3dobject(t_3dobject *obj, t_camera *cam, t_env *env)
 		f = (t_face *)l->content;
 		fm = *f;
 		f = &fm;
+		if (!i){
 		face_to_obj_space(f, obj);
 		if (to_camera_space(&f->v1, &c1, cam))
 		{
@@ -72,12 +73,13 @@ int		camera_draw_3dobject(t_3dobject *obj, t_camera *cam, t_env *env)
 					p3.pos.x = c_view.x;
 					p3.pos.y = c_view.y;
 					camera_draw_line(&p2, &p1, cam, env);
-					if (i)
-					camera_draw_line(&p2, &p3, cam, env);
-					else
+			//		if (i)
+			//		camera_draw_line(&p2, &p3, cam, env);
+			//		else
 					camera_draw_line(&p1, &p3, cam, env);
 				}
 			}
+		}
 		}
 		if (i)
 			i = 0;
