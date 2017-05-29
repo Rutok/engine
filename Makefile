@@ -8,11 +8,9 @@ SRC = srcs/engine.c \
 	  srcs/error.c \
 	  srcs/camera.c \
 	  srcs/camera_drawer.c \
-	  srcs/matrix.c \
-	  srcs/matrix_utility.c \
+	  srcs/camera_drawer_utility.c \
 	  srcs/object.c \
 	  srcs/scene.c \
-	  srcs/triangle.c \
 	  srcs/color.c \
 	  srcs/vertex_utility.c \
 

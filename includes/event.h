@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:39 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/21 02:38:10 by nboste           ###   ########.fr       */
+/*   Updated: 2017/05/29 12:53:26 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,90 +15,6 @@
 
 # include "libft.h"
 # include "SDL2/SDL.h"
-
-typedef enum		e_letters
-{
-	KEY_A = 0, KEY_B, KEY_C, KEY_D, KEY_E, KEY_F, KEY_G,
-	KEY_H, KEY_I, KEY_J, KEY_K, KEY_L, KEY_M, KEY_N, KEY_O,
-	KEY_P, KEY_Q, KEY_R, KEY_S, KEY_T, KEY_U, KEY_V, KEY_W,
-	KEY_X, KEY_Y, KEY_Z
-}					t_letters;
-
-typedef struct		s_key_alphan
-{
-	t_bool	letters[26];
-	t_bool	numbers[10];
-}					t_key_alphan;
-
-typedef enum		e_kp_keys
-{
-	KEY_KP_ENTER,
-	KEY_KP_PERIOD,
-	KEY_KP_PLUS,
-	KEY_KP_MINUS,
-	KEY_KP_MULTIPLY,
-	KEY_KP_DIVIDE,
-	KEY_KP_EQUALS,
-	KEY_KP_CLEARNUMLOCK
-}					t_kp_keys;
-
-typedef struct		s_key_pad
-{
-	t_bool	numbers[10];
-	t_bool	keys[10];
-}					t_key_pad;
-
-typedef enum		e_nav_keys
-{
-	KEY_UP,
-	KEY_DOWN,
-	KEY_LEFT,
-	KEY_RIGHT,
-	KEY_PAGEUP,
-	KEY_PAGEDOWN,
-	KEY_HOME,
-	KEY_END,
-	KEY_INSERT,
-	KEY_DELETE
-}					t_nav_keys;
-
-typedef struct		s_key_nav
-{
-	t_bool	keys[10];
-}					t_key_nav;
-
-typedef enum		e_functions_keys
-{
-	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5,
-	KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10,
-	KEY_F11, KEY_F12
-}					t_functions_keys;
-
-typedef struct		s_key_function
-{
-	t_bool	keys[12];
-}					t_key_function;
-
-typedef enum		e_specials_keys
-{
-	KEY_TAB,
-	KEY_CAPSLOCK,
-	KEY_LSHIFT,
-	KEY_RSHIFT,
-	KEY_LCTRL,
-	KEY_RCTRL,
-	KEY_LALT,
-	KEY_RALT,
-	KEY_RETURN,
-	KEY_BACKSPACE,
-	KEY_SPACE,
-	KEY_ESCAPE
-}					t_specials_keys;
-
-typedef struct		s_key_special
-{
-	t_bool	keys[12];
-}					t_key_special;
 
 typedef struct		s_mouse
 {
@@ -110,11 +26,6 @@ typedef struct		s_mouse
 
 typedef struct		s_event
 {
-	t_key_alphan	key_alphan;
-	t_key_pad		key_pad;
-	t_key_nav		key_nav;
-	t_key_function	key_function;
-	t_key_special	key_special;
 	const Uint8		*keys;
 	t_mouse			mouse;
 	t_bool			focus;
@@ -123,12 +34,12 @@ typedef struct		s_event
 	t_bool			draw;
 }					t_event;
 
-void	event_process(t_event *event);
+void				event_process(t_event *event);
 
-void	event_reset(t_event *event);
+void				event_reset(t_event *event);
 
-void	event_handle_mouse(SDL_Event *ev, t_event *event);
+void				event_handle_mouse(SDL_Event *ev, t_event *event);
 
-int		handle_event(t_bool *e);
+int					handle_event(t_bool *e);
 
 #endif

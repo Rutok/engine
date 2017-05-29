@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 06:01:47 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/17 01:45:51 by nboste           ###   ########.fr       */
+/*   Updated: 2017/05/29 17:03:06 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	drawer_process(t_renderer *rend);
 
 void	drawer_destroy(t_renderer *rend);
 
-void	drawer_put_pixel(t_2ipair coord, uint32 color, t_renderer *rend);
+void	drawer_put_pixel(t_2ipair coord, t_uint32 color, t_renderer *rend);
 
 void	drawer_clean(t_renderer *rend);
 
