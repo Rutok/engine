@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nboste <nboste@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/06/02 11:46:20 by nboste            #+#    #+#              #
+#    Updated: 2017/06/02 11:46:30 by nboste           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libengine.a
 
 FLG = -Wall -Wextra -Werror
@@ -20,7 +32,7 @@ INC = -I./includes \
 	  -I./libft/includes \
 	  -I/usr/include \
 	  -I/usr/include/SDL2 \
-	  -I/Library/Frameworks/SDL2.framework/Headers
+	  -I/Library/Frameworks/SDL2.framework/Headers \
 
 all: $(NAME)
 
