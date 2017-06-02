@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/02/21 23:36:01 by nboste           ###   ########.fr       */
+/*   Updated: 2017/06/02 10:44:18 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	event_process(t_event *event)
 			else if (ev.type == SDL_MOUSEMOTION || ev.type == SDL_MOUSEBUTTONUP)
 				event_handle_mouse(&ev, event);
 		}
-		if (ev.type == SDL_WINDOWEVENT && ev.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
+		if (ev.type == SDL_WINDOWEVENT
+				&& ev.window.event == SDL_WINDOWEVENT_FOCUS_GAINED)
 			event->focus = 1;
-		else if (ev.type == SDL_WINDOWEVENT && ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
+		else if (ev.type == SDL_WINDOWEVENT
+				&& ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST)
 			event->focus = 0;
 	}
 	if (event->focus)

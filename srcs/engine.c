@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/05/29 16:56:01 by nboste           ###   ########.fr       */
+/*   Updated: 2017/06/02 10:48:54 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 static void	print_fps(void)
 {
-	static int time;
-	static int fps;
-	Uint32			t;
+	static int	time;
+	static int	fps;
+	Uint32		t;
 
 	fps++;
 	if (!time)
@@ -34,14 +34,17 @@ static void	print_fps(void)
 	}
 }
 
-void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void (*destroy)(t_env *))
+void		engine_init(t_env *env, void (*init)(t_env *),
+						int (*process)(void *), void (*destroy)(t_env *))
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 		ft_exit(MSG_SDL_INIT_FAILED);
-	if (!(env->win.win_sdl = SDL_CreateWindow(env->win.name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, env->win.size.x, env->win.size.y, SDL_WINDOW_SHOWN)))
+	if (!(env->win.win_sdl = SDL_CreateWindow(env->win.name,
+					SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+					env->win.size.x, env->win.size.y,
+					SDL_WINDOW_SHOWN)))
 		ft_exit(MSG_SDL_INIT_FAILED);
 	drawer_init(env);
-	SDL_SetWindowFullscreen(env->win.win_sdl, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	env->app.init = init;
 	env->app.process = process;
 	env->app.destroy = destroy;
@@ -51,7 +54,7 @@ void	engine_init(t_env *env, void (*init)(t_env *), int (*process)(void *), void
 	SDL_WarpMouseInWindow(NULL, env->win.size.x / 2, env->win.size.y / 2);
 }
 
-int		engine_run(t_env *env)
+int			engine_run(t_env *env)
 {
 	int	time;
 	int	etime;
@@ -78,7 +81,7 @@ int		engine_run(t_env *env)
 	return (0);
 }
 
-void	engine_destroy(t_env *env)
+void		engine_destroy(t_env *env)
 {
 	if (env->app.destroy)
 		env->app.destroy(env);
