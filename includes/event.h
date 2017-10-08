@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:39 by nboste            #+#    #+#             */
-/*   Updated: 2017/05/29 12:53:26 by nboste           ###   ########.fr       */
+/*   Updated: 2017/09/25 14:56:03 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EVENT_H
 
 # include "libft.h"
-# include "SDL2/SDL.h"
+# include "SDL.h"
 
 typedef struct		s_mouse
 {

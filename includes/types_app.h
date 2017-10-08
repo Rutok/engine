@@ -6,14 +6,14 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 10:18:12 by nboste            #+#    #+#             */
-/*   Updated: 2017/06/02 10:36:12 by nboste           ###   ########.fr       */
+/*   Updated: 2017/09/25 14:47:50 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_APP_H
 # define TYPES_APP_H
 
-# include <SDL2/SDL.h>
+# include <SDL.h>
 # include "libft.h"
 # include "event.h"
 

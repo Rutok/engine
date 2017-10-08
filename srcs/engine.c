@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 14:00:35 by nboste            #+#    #+#             */
-/*   Updated: 2017/09/27 21:28:20 by nboste           ###   ########.fr       */
+/*   Updated: 2017/10/02 12:51:35 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int			engine_run(t_env *env)
 		if (env->rend.draw)
 			drawer_process(&env->rend);
 		print_fps();
+		env->event.mouse.move = 0;
 	}
 	engine_destroy(env);
 	return (0);

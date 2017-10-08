@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/06/02 10:44:18 by nboste           ###   ########.fr       */
+/*   Updated: 2017/10/08 17:55:40 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	event_process(t_event *event)
 {
 	SDL_Event	ev;
 
+	event->mouse.lclick = 0;
+	event->mouse.rclick = 0;
 	while (SDL_PollEvent(&ev))
 	{
 		if (event->focus)
