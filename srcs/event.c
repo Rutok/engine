@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 05:15:18 by nboste            #+#    #+#             */
-/*   Updated: 2017/10/08 17:55:40 by nboste           ###   ########.fr       */
+/*   Updated: 2017/10/11 13:52:40 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	event_process(t_event *event)
 
 	event->mouse.lclick = 0;
 	event->mouse.rclick = 0;
+	event->mouse.wup = 0;
+	event->mouse.wdown = 0;
 	while (SDL_PollEvent(&ev))
 	{
 		if (event->focus)
 		{
 			if (ev.type == SDL_QUIT)
 				event->exit = 1;
-			else if (ev.type == SDL_MOUSEMOTION || ev.type == SDL_MOUSEBUTTONUP)
+			else if (ev.type == SDL_MOUSEMOTION || ev.type == SDL_MOUSEWHEEL)
 				event_handle_mouse(&ev, event);
 		}
 		if (ev.type == SDL_WINDOWEVENT
@@ -52,6 +54,17 @@ void	event_handle_mouse(SDL_Event *ev, t_event *event)
 		event->mouse.move = 1;
 		event->mouse.pos.x = ev->motion.x;
 		event->mouse.pos.y = ev->motion.y;
+	}
+	else if (ev->type == SDL_MOUSEWHEEL)
+	{
+		if (ev->wheel.y == 1)
+		{
+			event->mouse.wup = 1;
+		}
+		else if (ev->wheel.y == -1)
+		{
+			event->mouse.wdown = 1;
+		}
 	}
 	else
 	{
